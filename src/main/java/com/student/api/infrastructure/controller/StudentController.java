@@ -2,7 +2,6 @@ package com.student.api.infrastructure.controller;
 
 import com.student.api.application.port.in.CreateStudentUseCase;
 import com.student.api.application.port.in.GetActiveStudentsUseCase;
-import com.student.api.domain.model.Student;
 import com.student.api.infrastructure.config.Constants;
 import com.student.api.infrastructure.dto.ControllerResponse;
 import com.student.api.infrastructure.dto.StudentDTO;
@@ -32,8 +31,12 @@ public class StudentController {
                 .map(savedStudent -> ResponseEntity.status(HttpStatus.CREATED)
                         .body(new ControllerResponse(Constants.STUDENT_CREATED)));
     }
+
     @GetMapping("/active")
-    public Flux<Student> getActiveStudents() {
-        return getActiveStudents.getActiveStudents();
+    public ResponseEntity<Flux<StudentDTO>> getActiveStudents() {
+        return ResponseEntity.ok(
+                getActiveStudents.getActiveStudents()
+                        .map(studentMapper::toDTO)
+        );
     }
 }

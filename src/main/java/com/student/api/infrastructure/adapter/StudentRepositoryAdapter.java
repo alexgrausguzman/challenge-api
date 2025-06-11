@@ -37,7 +37,7 @@ public class StudentRepositoryAdapter implements StudentRepositoryPort {
 
     @Override
     public Flux<Student> getActiveStudents() {
-        return studentRepository.findByStatus(StudentStatus.active)
+        return studentRepository.findByStatus(StudentStatus.ACTIVE)
                 .map(studentMapper::toDomain);
     }
 }

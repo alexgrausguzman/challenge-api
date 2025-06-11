@@ -13,4 +13,5 @@ public interface StudentMapper {
     Student toDomain(StudentEntity entity);
     @Mapping(target = "status", source = "status")
     Student toDomainDto(StudentDTO dto);
+    StudentDTO toDTO(Student student);
 }
